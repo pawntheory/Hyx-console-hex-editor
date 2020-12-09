@@ -148,11 +148,11 @@ static void render_line(struct view *view, size_t off, size_t last)
     if (off <= I->cur && I->cur < off + view->cols) {
         /* cursor in current line */
         if (view->color) print(color_yellow);
-        printf("%0*zx%c ", view->pos_digits, I->cur, I->input_mode.insert ? '+' : '>');
+        printf("%0*zX%c ", view->pos_digits, I->cur, I->input_mode.insert ? '+' : '>');
         if (view->color) print(color_normal);
     }
     else {
-        printf("%0*zx: ", view->pos_digits, off);
+        printf("%0*zX: ", view->pos_digits, off);
     }
 
     if (I->mode == SELECT && off > sel_start && off <= sel_end)
@@ -161,7 +161,7 @@ static void render_line(struct view *view, size_t off, size_t last)
     for (size_t j = 0, len = blob_length(view->blob); j < view->cols; ++j) {
 
         if (off + j < len) {
-            sprintf(digits, "%02hhx", b = blob_at(view->blob, off + j));
+            sprintf(digits, "%02hhX", b = blob_at(view->blob, off + j));
         }
         else {
             b = 0;
